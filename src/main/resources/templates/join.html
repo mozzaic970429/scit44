@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>회원가입</title>
+        <style></style>
+        <script th:src="@{/js/jquery-3.6.0.js}"></script>
+        <script></script>
+    </head>
+    <body>
+        <h1>[ 회원가입 ]</h1>
+
+        <form th:action="@{/member/join}" method="post">
+            <table>
+                <tr>
+                    <td><span>ID</span></td>
+                    <td><input type="text" name="memberid" id="memberid" /></td>
+                </tr>
+                <tr>
+                    <td><span>비밀번호</span></td>
+                    <td><input type="password" name="memberpw" id="memberpw" /></td>
+                </tr>
+                <tr>
+                    <td><span>이름</span></td>
+                    <td><input type="text" name="membername" /></td>
+                </tr>
+                <tr>
+                    <td><span>전화번호</span></td>
+                    <td><input type="text" name="phone" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="가입" /><input type="button" value="다시 쓰기" /></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

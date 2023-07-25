@@ -19,5 +19,11 @@ import net.softsociety.exam.service.MemberService;
 @Controller
 public class MemberController {
 	
-
+    /**
+     * 회원가입
+     */
+    @GetMapping("join")
+    public String join() {
+        return "join";
+    }
 }
