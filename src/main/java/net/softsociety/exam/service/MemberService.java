@@ -9,4 +9,5 @@ public interface MemberService {
     // 회원가입
     void insertMember(Member m);
 
+
 }

@@ -35,4 +35,13 @@ public class MemberController {
         service.insertMember(m);
         return "redirect:/";
     }
+
+    /**
+     * 로그인
+     */
+    @GetMapping("login")
+    public String loginForm() {
+        return "loginForm";
+    }
+
 }

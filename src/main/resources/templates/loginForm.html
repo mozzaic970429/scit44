@@ -8,6 +8,21 @@
     <body>
         <h1>[ 로그인 ]</h1>
 
-        <form></form>
+        <form th:action="login" method="post">
+            <table>
+                <tr>
+                    <td><span>ID</span></td>
+                    <td><input type="text" name="memberid" /></td>
+                </tr>
+                <tr>
+                    <td><span>Password</span></td>
+                    <td><input type="password" name="memberpw" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Login" /></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
