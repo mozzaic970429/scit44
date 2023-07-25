@@ -10,6 +10,22 @@ import net.softsociety.exam.domain.Member;
 @Service
 public class MemberSeviceImpl implements MemberService {
 
+    @Autowired
+    MemberDAO dao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    // 회원가입
+    @Override
+    public void insertMember(Member m) {
+        // 비밀번호 암호화
+        String pw = passwordEncoder.encode(m.getMemberpw());
+        m.setMemberpw(pw);
+
+        dao.insertMember(m);
+    }
+
    
 
 }

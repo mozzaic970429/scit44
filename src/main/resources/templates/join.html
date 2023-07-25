@@ -5,12 +5,36 @@
         <title>회원가입</title>
         <style></style>
         <script th:src="@{/js/jquery-3.6.0.js}"></script>
-        <script></script>
+        <script>
+            function check() {
+                let id = document.getElementById("memberid").value;
+                let pw = document.getElementById("memberpw").value;
+                let name = document.getElementById("membername").value;
+                let phone = document.getElementById("phone").value;
+
+                if (id.length < 3 || id.length > 10) {
+                    alert("ID는 3~10자로 입력하세요.");
+                    return false;
+                } else if (pw.length < 3 || pw.length > 10) {
+                    alert("비밀번호는 3~10자로 입력하세요.");
+                    return false;
+                } else if (name == "") {
+                    alert("이름을 입력하세요.");
+                    return false;
+                } else if (phone == "") {
+                    alert("전화번호를 입력하세요");
+                    return false;
+                }
+                return true;
+            }
+
+            function reset() {}
+        </script>
     </head>
     <body>
         <h1>[ 회원가입 ]</h1>
 
-        <form th:action="@{/member/join}" method="post">
+        <form th:action="@{/member/join}" method="post" onsubmit="return check()">
             <table>
                 <tr>
                     <td><span>ID</span></td>
@@ -22,15 +46,15 @@
                 </tr>
                 <tr>
                     <td><span>이름</span></td>
-                    <td><input type="text" name="membername" /></td>
+                    <td><input type="text" name="membername" id="membername" /></td>
                 </tr>
                 <tr>
                     <td><span>전화번호</span></td>
-                    <td><input type="text" name="phone" /></td>
+                    <td><input type="text" name="phone" id="phone" /></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="가입" /><input type="button" value="다시 쓰기" /></td>
+                    <td><input type="submit" value="가입" /><input type="button" value="다시 쓰기" onclick="reset()" /></td>
                 </tr>
             </table>
         </form>

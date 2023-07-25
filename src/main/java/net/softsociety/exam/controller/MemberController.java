@@ -19,11 +19,20 @@ import net.softsociety.exam.service.MemberService;
 @Controller
 public class MemberController {
 	
+    @Autowired
+    MemberService service;
+
     /**
      * 회원가입
      */
     @GetMapping("join")
     public String join() {
         return "join";
+    }
+
+    @PostMapping("join")
+    public String insertMember(Member m) {
+        service.insertMember(m);
+        return "redirect:/";
     }
 }
