@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8" />
+        <title>market</title>
+        <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    </head>
+    <body>
+        <h1>[ 판매 정보 게시판 ]</h1>
+        <div sec:authorize="isAuthenticated()">
+            <p><a th:href="@{/board/insert}">판매글 등록</a></p>
+        </div>
+
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+            </tr>
+            <tr th:each="b : ${board}">
+                <td><span th:text="${b.boardnum}"></span></td>
+                <td>
+                    <a href=""><span th:text="${b.title}"></span></a>
+                </td>
+                <td><span th:text="${b.memberid}"></span></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -14,4 +14,11 @@ import net.softsociety.exam.domain.Reply;
 @Mapper
 public interface BoardDAO {
 
+    // 전체글 조회
+    ArrayList<Board> listAll();
+    
+    // 판매글 등록
+    void insertBoard(Board b);
+
+
 }

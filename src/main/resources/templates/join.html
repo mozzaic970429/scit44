@@ -6,12 +6,12 @@
         <style></style>
         <script th:src="@{/js/jquery-3.6.0.js}"></script>
         <script>
-            function check() {
-                let id = document.getElementById("memberid").value;
-                let pw = document.getElementById("memberpw").value;
-                let name = document.getElementById("membername").value;
-                let phone = document.getElementById("phone").value;
+            let id = document.getElementById("memberid").value;
+            let pw = document.getElementById("memberpw").value;
+            let name = document.getElementById("membername").value;
+            let phone = document.getElementById("phone").value;
 
+            function check() {
                 if (id.length < 3 || id.length > 10) {
                     alert("ID는 3~10자로 입력하세요.");
                     return false;
@@ -28,7 +28,12 @@
                 return true;
             }
 
-            function reset() {}
+            function reset() {
+                id = "";
+                pw = "";
+                name = "";
+                phone = "";
+            }
         </script>
     </head>
     <body>

@@ -26,6 +26,7 @@ public class WebSecurityConfig {
         .authorizeRequests()
         .antMatchers("/",
                 "/member/join",
+                "/board/list",
                 "/image/**",
                 "/css/**",
                 "/js/**").permitAll()
