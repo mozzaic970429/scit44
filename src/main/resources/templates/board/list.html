@@ -20,7 +20,9 @@
             <tr th:each="b : ${board}">
                 <td><span th:text="${b.boardnum}"></span></td>
                 <td>
-                    <a href=""><span th:text="${b.title}"></span></a>
+                    <a th:href="@{/board/info(boardnum=${b.boardnum})}">
+                        <span th:text="${b.title}"></span>
+                    </a>
                 </td>
                 <td><span th:text="${b.memberid}"></span></td>
             </tr>

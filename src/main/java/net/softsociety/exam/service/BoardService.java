@@ -13,6 +13,15 @@ public interface BoardService {
     // 판매글 등록
     void insert(Board b);
 
+    // 판매 정보
+    Board info(int boardnum);
+
+    // 판매글 삭제
+    void delete(Board b);
+    
+    // 상품 구매
+    void buyItem(Board b);
+
 
 
 }

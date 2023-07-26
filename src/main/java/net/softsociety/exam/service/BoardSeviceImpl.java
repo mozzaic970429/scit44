@@ -32,6 +32,25 @@ public class BoardSeviceImpl implements BoardService {
         dao.insertBoard(b);
     }
 
+    // 판매 정보
+    @Override
+    public Board info(int boardnum) {
+        Board b = dao.infoBoard(boardnum);
+        return b;
+    }
+
+    // 판매글 삭제
+    @Override
+    public void delete(Board b) {
+        dao.deleteBoard(b);
+    }
+
+    // 상품 구매
+    @Override
+    public void buyItem(Board b) {
+        dao.buyItem(b);
+    }
+
 
 
 }

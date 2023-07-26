@@ -4,31 +4,50 @@
         <meta charset="UTF-8" />
         <title>market</title>
         <script th:src="@{/js/jquery-3.6.0.js}"></script>
+        <script>
+            function deleteBoard(boardnum) {
+                if (confirm("삭제하시겠습니까?")) {
+                    location.href = "delete?boardnum=" + boardnum;
+                }
+            }
+
+            function buyItem(boardnum) {
+                if (confirm("구매하시겠습니까?")) {
+                    location.href = "buyItem?boardnum=" + boardnum;
+                }
+            }
+        </script>
     </head>
     <body>
         <h1>[ 판매 정보 ]</h1>
-        <table>
+        <table th:each="b : ${board}">
             <tr>
-                <td>작성자</td>
-                <td></td>
+                <th>작성자</th>
+                <td th:text="${b.memberid}"></td>
             </tr>
             <tr>
-                <td>작성일</td>
-                <td></td>
+                <th>작성일</th>
+                <td th:text="${b.inputdate}"></td>
             </tr>
             <tr>
-                <td>제목</td>
-                <td></td>
+                <th>제목</th>
+                <td th:text="${b.title}"></td>
             </tr>
             <tr>
-                <td>내용</td>
-                <td></td>
+                <th>내용</th>
+                <td>
+                    <pre th:text="${b.content}"></pre>
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <div sec:authorize="isAuthenticated"><a href="">삭제</a></div>
-                    <div sec:authorize="not isAuthenticated"><a href="">구매하기</a></div>
+                    <div th:if="${#authentication.name} == ${b.memberid}">
+                        <a th:href="|javascript:deleteBoard(${b.boardnum})|">삭제</a>
+                    </div>
+                    <div th:unless="${#authentication.name} == ${b.memberid}">
+                        <a th:href="|javascript:buyItem(${b.boardnum})|">구매하기</a>
+                    </div>
                 </td>
             </tr>
         </table>

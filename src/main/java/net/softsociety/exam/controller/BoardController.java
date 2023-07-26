@@ -49,4 +49,32 @@ public class BoardController {
         service.insert(b);
         return "redirect:/board/list";
     }
+
+    // 판매 정보
+    @GetMapping("info")
+    public String info(int boardnum, Model model) {
+        Board b = service.info(boardnum);
+        model.addAttribute("board", b);
+        return "/board/info";
+    }
+
+    // 판매글 삭제
+    @GetMapping("delete")
+    public String delete(int boardnum, @AuthenticationPrincipal UserDetails user) {
+        Board b = new Board();
+        b.setBoardnum(boardnum);
+        b.setMemberid(user.getUsername());
+        service.delete(b);
+        return "redirect:/board/list";
+    }
+
+    // 판매상품 구매
+    @GetMapping("buyItem")
+    public String buyItem(int boardnum, @AuthenticationPrincipal UserDetails user) {
+        Board b = new Board();
+        b.setBoardnum(boardnum);
+        b.setBuyerid(user.getUsername());
+        service.buyItem(b);
+        return "redirect:/board/list";
+    }
 }

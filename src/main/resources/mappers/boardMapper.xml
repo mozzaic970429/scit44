@@ -6,7 +6,14 @@
 
 <!-- 전체 글 조회 -->
 <select id="listAll" resultType="Board">
-        select boardnum, title, memberid from market_board
+        select
+                boardnum
+                , title
+                , memberid
+        from
+                market_board
+        where
+                soldout = 'N'
 </select>
 
 <!-- 판매글 저장 -->
@@ -27,6 +34,31 @@
         )
 </insert>
 
+<!-- 판매 정보 -->
+<select id="infoBoard" parameterType="int" resultType="Board">
+        select
+                boardnum, memberid, inputdate, title, content
+        from
+                market_board
+        where
+                boardnum = #{boardnum}
+</select>
 
+<!-- 판매글 삭제 -->
+<delete id="deleteBoard" parameterType="Board">
+        delete from market_board
+        where
+                boardnum = #{boardnum}
+                and memberid = #{memberid}
+</delete>
 
+<!-- 상품 구매 -->
+<update id="buyItem" parameterType="Board">
+        update market_board
+        set
+                soldout = 'Y'
+                , buyerid = #{buyerid}
+        where
+                boardnum = #{boardnum}
+</update>
 </mapper>
