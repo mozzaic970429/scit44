@@ -29,5 +29,8 @@ public interface BoardDAO {
     // 상품 구매
     void buyItem(Board b);
 
+    // 댓글 쓰기
+    void writeReply(Reply reply);
+
 
 }

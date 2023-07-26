@@ -76,5 +76,15 @@ public class BoardController {
         b.setBuyerid(user.getUsername());
         service.buyItem(b);
         return "redirect:/board/list";
+    } 
+
+    // 판매글 댓글쓰기
+    @PostMapping("writeReply")
+    public String writeReply(Reply reply, @AuthenticationPrincipal UserDetails user) {
+        log.debug("리플 : {}", reply);
+        reply.setMemberid(user.getUsername());
+        log.debug("리플 : {}", reply);
+        service.writeReply(reply);
+        return "redirect:/board/info?boardnum=" + reply.getBoardnum();
     }
 }

@@ -61,4 +61,20 @@
         where
                 boardnum = #{boardnum}
 </update>
+
+<!-- 댓글 쓰기 -->
+<insert id="writeReply" parameterType="Reply">
+        insert into market_reply (
+                replynum
+                , boardnum
+                , memberid
+                , replytext
+        )
+        values (
+                market_reply_seq.nextval
+                , #{boardnum}
+                , #{memberid}
+                , #{replytext}
+        )
+</insert>
 </mapper>

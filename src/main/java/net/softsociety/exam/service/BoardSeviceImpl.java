@@ -51,6 +51,12 @@ public class BoardSeviceImpl implements BoardService {
         dao.buyItem(b);
     }
 
+    // 댓글 쓰기
+    @Override
+    public void writeReply(Reply reply) {
+        dao.writeReply(reply);
+    }
+
 
 
 }
