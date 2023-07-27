@@ -32,8 +32,9 @@ public class BoardController {
     // 게시판 리스트
 	@GetMapping("list")
     public String list(Model model) {
-        ArrayList<Board> b =  service.listAll();
+        ArrayList<Board> b = service.listAll();
         model.addAttribute("board", b);
+        
         return "/board/list";
     }
 
@@ -54,7 +55,9 @@ public class BoardController {
     @GetMapping("info")
     public String info(int boardnum, Model model) {
         Board b = service.info(boardnum);
+        ArrayList<Reply> r = service.replyAll();
         model.addAttribute("board", b);
+        model.addAttribute("reply", r);
         return "/board/info";
     }
 
@@ -86,5 +89,11 @@ public class BoardController {
         log.debug("리플 : {}", reply);
         service.writeReply(reply);
         return "redirect:/board/info?boardnum=" + reply.getBoardnum();
+    }
+
+    // 판매 상품 검색 페이지
+    @GetMapping("search")
+    public String searchPage() {
+        return "/board/search";
     }
 }

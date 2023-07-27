@@ -59,5 +59,13 @@
                 <input type="submit" value="확인" />
             </form>
         </div>
+
+        <table>
+            <tr th:each="r : ${reply}">
+                <td th:text="${r.memberid}"></td>
+                <td th:text="${r.replytext}"></td>
+                <td th:text="${r.inputdate}"></td>
+            </tr>
+        </table>
     </body>
 </html>

@@ -77,4 +77,16 @@
                 , #{replytext}
         )
 </insert>
+
+<!-- 댓글 조회 -->
+<select id="replyAll" resultType="Reply">
+        select
+                memberid
+                , replytext
+                , inputdate
+        from
+                market_reply
+        order by
+                replynum asc
+</select>
 </mapper>

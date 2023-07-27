@@ -57,6 +57,11 @@ public class BoardSeviceImpl implements BoardService {
         dao.writeReply(reply);
     }
 
-
+    // 댓글 조회
+    @Override
+    public ArrayList<Reply> replyAll() {
+        ArrayList<Reply> r = dao.replyAll();
+        return r;
+    }
 
 }

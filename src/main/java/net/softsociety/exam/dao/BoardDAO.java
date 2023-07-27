@@ -32,5 +32,6 @@ public interface BoardDAO {
     // 댓글 쓰기
     void writeReply(Reply reply);
 
-
+    // 댓글 조회
+    ArrayList<Reply> replyAll();
 }
