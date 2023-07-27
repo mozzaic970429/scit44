@@ -94,7 +94,7 @@
 </select>
 
 <!-- 필터링된 전체글 리스트 -->
-<select id="filteredList" parameteType="string" resultType="Board">
+<select id="filteredList" resultType="Board">
     select
         boardnum
         , category
