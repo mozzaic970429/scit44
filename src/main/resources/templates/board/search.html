@@ -4,8 +4,42 @@
         <meta charset="UTF-8" />
         <title>market</title>
         <script th:src="@{/js/jquery-3.6.0.js}"></script>
+        <script>
+            function change() {
+                alert($("#type").val());
+                $.ajax({
+                    url: "filter",
+                    type: "post",
+                    data: { type: $("#type").val() },
+                    dataType: "ajax",
+                    success: function () {},
+                    error: function () {},
+                });
+            }
+        </script>
     </head>
     <body>
         <h1>[ 판매 상품 검색 ]</h1>
+        <p><a th:href="@{/}">홈으로</a></p>
+        <select name="type" id="type" onchange="change()">
+            <option value="all">전체</option>
+            <option value="computer">컴퓨터 및 주변기기</option>
+            <option value="camera">카메라</option>
+            <option value="car">자동차 용품</option>
+        </select>
+        <input type="text" id="keyword" />
+
+        <table>
+            <tr>
+                <td>번호</td>
+                <td>카테고리</td>
+                <td>제목</td>
+            </tr>
+            <tr th:each="b : ${board}">
+                <td th:text="${b.boardnum}" id="boardnum"></td>
+                <td th:text="${b.category}" id="category"></td>
+                <td th:text="${b.title}" id="title"></td>
+            </tr>
+        </table>
     </body>
 </html>

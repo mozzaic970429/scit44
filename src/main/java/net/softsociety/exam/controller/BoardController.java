@@ -93,7 +93,16 @@ public class BoardController {
 
     // 판매 상품 검색 페이지
     @GetMapping("search")
-    public String searchPage() {
+    public String searchPage(Model model) {
+        ArrayList<Board> b = service.listAll();
+        model.addAttribute("board", b);
         return "/board/search";
+    }
+
+    // 검색 페이지 카테고리 필터
+    @PostMapping("filter")
+    public ArrayList<Board> filter(String type) {
+        ArrayList<Board> b = service.filteredList(type);
+        return b;
     }
 }

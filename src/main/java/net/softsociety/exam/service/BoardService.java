@@ -28,5 +28,8 @@ public interface BoardService {
     // 댓글 조회
     ArrayList<Reply> replyAll();
 
+    // 카테고리 필터링된 전체글 조회
+    ArrayList<Board> filteredList(String type);
+
 
 }

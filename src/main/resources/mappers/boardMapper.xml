@@ -10,10 +10,13 @@
                 boardnum
                 , title
                 , memberid
+                , category
         from
                 market_board
         where
                 soldout = 'N'
+        order by
+                boardnum desc
 </select>
 
 <!-- 판매글 저장 -->
@@ -88,5 +91,17 @@
                 market_reply
         order by
                 replynum asc
+</select>
+
+<!-- 필터링된 전체글 리스트 -->
+<select id="filteredList" parameteType="string" resultType="Board">
+    select
+        boardnum
+        , category
+        , title
+    from
+        market_board
+	where
+		<if test="category == 'all'"></if>	
 </select>
 </mapper>

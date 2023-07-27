@@ -64,4 +64,11 @@ public class BoardSeviceImpl implements BoardService {
         return r;
     }
 
+    // 필터링된 리스트 조회
+    @Override
+    public ArrayList<Board> filteredList(String type) {
+        ArrayList<Board> b = dao.filteredList(type);
+        return b;
+    }
+
 }

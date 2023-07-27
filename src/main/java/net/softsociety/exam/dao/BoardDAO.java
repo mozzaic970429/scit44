@@ -34,4 +34,7 @@ public interface BoardDAO {
 
     // 댓글 조회
     ArrayList<Reply> replyAll();
+
+    // 필터링된 전체글 리스트
+    ArrayList<Board> filteredList(String type);
 }
