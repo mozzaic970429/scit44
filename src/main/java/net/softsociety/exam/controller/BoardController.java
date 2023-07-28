@@ -93,16 +93,30 @@ public class BoardController {
 
     // 판매 상품 검색 페이지
     @GetMapping("search")
-    public String searchPage(Model model) {
-        ArrayList<Board> b = service.listAll();
-        model.addAttribute("board", b);
+    public String searchPage() {
         return "/board/search";
     }
 
-    // 검색 페이지 카테고리 필터
-    @PostMapping("filter")
-    public ArrayList<Board> filter(String type) {
-        ArrayList<Board> b = service.filteredList(type);
+    @ResponseBody
+    @GetMapping("listAll")
+    public ArrayList<Board> listAll() {
+        ArrayList<Board> b = service.listAll();
         return b;
     }
+
+    // 검색 페이지 카테고리 필터
+    @ResponseBody
+    @PostMapping("searchCategory")
+    public ArrayList<Board> searchCategory(String category) {
+        log.debug("카테고리 : {}", category);
+        return service.searchCategory(category);
+    }
+
+    @ResponseBody
+    @PostMapping("searchWord")
+    public ArrayList<Board> searchWord(String category, String keyword) {
+        log.debug("카테고리 : {}, 키워드 : {}", category, keyword);
+        return service.searchWord(category, keyword);
+    }
+
 }

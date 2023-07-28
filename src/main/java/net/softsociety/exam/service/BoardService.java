@@ -29,7 +29,10 @@ public interface BoardService {
     ArrayList<Reply> replyAll();
 
     // 카테고리 필터링된 전체글 조회
-    ArrayList<Board> filteredList(String type);
+    ArrayList<Board> searchCategory(String category);
+
+    // 카테고리 + 검색어 필터링
+    ArrayList<Board> searchWord(String category, String keyword);
 
 
 }

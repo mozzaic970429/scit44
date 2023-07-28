@@ -3,17 +3,106 @@
     <head>
         <meta charset="UTF-8" />
         <title>market</title>
+        <style>
+            table td:first-child {
+                width: 50px;
+            }
+            table td:nth-child(2) {
+                width: 70px;
+            }
+            table td:nth-child(3) {
+                width: 100px;
+            }
+        </style>
         <script th:src="@{/js/jquery-3.6.0.js}"></script>
         <script>
-            function change() {
-                alert($("#type").val());
+            $(document).ready(function () {
+                init();
+                $("#category").change(searchCategory);
+                $("#keyword").keydown(searchWord);
+            });
+
+            function init() {
                 $.ajax({
-                    url: "filter",
-                    type: "post",
-                    data: { type: $("#type").val() },
-                    dataType: "ajax",
-                    success: function () {},
+                    url: "listAll",
+                    type: "get",
+                    dataType: "json",
+                    success: function (b) {
+                        let str = `
+                        <table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>;
+                        `;
+                        $(b).each(function (index, item) {
+                            str += `<tr>`;
+                            str += `<td>${item.boardnum}</td>`;
+                            str += `<td>${item.category}</td>`;
+                            str += `<td>${item.title}</td>`;
+                            str += `</tr>`;
+                        });
+                        str += `</table>`;
+                        $("#contentsArea").html(str);
+                    },
                     error: function () {},
+                });
+            }
+
+            function searchWord() {
+                let keyword = $("#keyword").val();
+                let category = $("#category option:selected").val();
+
+                $.ajax({
+                    url: "searchWord",
+                    type: "post",
+                    data: { keyword: keyword, category: category },
+                    success: function (list) {
+                        let str = "<table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>";
+                        $(list).each(function (i, ob) {
+                            str += "<tr>";
+                            str += "<td>" + ob.boardnum + "</td>";
+                            str += "<td>" + ob.category + "</td>";
+                            str += "<td>" + ob.title + "</td>";
+                            str += "</tr>";
+                        });
+                        str += "</table>";
+                        $("#contentsArea").html(str);
+                    },
+                    error: function (e) {
+                        console.log(JSON.stringify(e));
+                    },
+                });
+            }
+
+            function searchCategory() {
+                let keyword = $("#keyword").val();
+                let category = $("#category option:selected").val();
+
+                if (keyword != null || keyword != "") {
+                    searchWord();
+                    return;
+                }
+
+                if (category == "all") {
+                    init();
+                }
+
+                $.ajax({
+                    url: "searchCategory",
+                    type: "post",
+                    data: { category: category },
+                    success: function (list) {
+                        let str = "<table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>";
+                        $(list).each(function (i, ob) {
+                            str += "<tr>";
+                            str += "<td>" + ob.boardnum + "</td>";
+                            str += "<td>" + ob.category + "</td>";
+                            str += "<td>" + ob.title + "</td>";
+                            str += "</tr>";
+                        });
+                        str += "</table>";
+                        $("#contentsArea").html(str);
+                    },
+                    error: function (e) {
+                        console.log(JSON.stringify(e));
+                    },
                 });
             }
         </script>
@@ -21,7 +110,7 @@
     <body>
         <h1>[ 판매 상품 검색 ]</h1>
         <p><a th:href="@{/}">홈으로</a></p>
-        <select name="type" id="type" onchange="change()">
+        <select name="category" id="category">
             <option value="all">전체</option>
             <option value="computer">컴퓨터 및 주변기기</option>
             <option value="camera">카메라</option>
@@ -29,17 +118,6 @@
         </select>
         <input type="text" id="keyword" />
 
-        <table>
-            <tr>
-                <td>번호</td>
-                <td>카테고리</td>
-                <td>제목</td>
-            </tr>
-            <tr th:each="b : ${board}">
-                <td th:text="${b.boardnum}" id="boardnum"></td>
-                <td th:text="${b.category}" id="category"></td>
-                <td th:text="${b.title}" id="title"></td>
-            </tr>
-        </table>
+        <table id="contentsArea"></table>
     </body>
 </html>

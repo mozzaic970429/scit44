@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import net.softsociety.exam.dao.BoardDAO;
 import net.softsociety.exam.domain.Board;
 import net.softsociety.exam.domain.Reply;
 
-
+@Slf4j
 @Transactional
 @Service
 public class BoardSeviceImpl implements BoardService {
@@ -64,11 +65,23 @@ public class BoardSeviceImpl implements BoardService {
         return r;
     }
 
-    // 필터링된 리스트 조회
+    // 카테고리 필터링된 리스트 조회
     @Override
-    public ArrayList<Board> filteredList(String type) {
-        ArrayList<Board> b = dao.filteredList(type);
-        return b;
+    public ArrayList<Board> searchCategory(String category) {
+        log.debug("서비스 카테고리 : {}", category);
+        return dao.searchCategory(category);
     }
+
+    // 카테고리 + 검색어 필터링
+    @Override
+    public ArrayList<Board> searchWord(String category, String keyword) {
+        log.debug("서비스 카테고리 : {}, 키워드 : {}", category, keyword);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("category", category);
+        map.put("keyword", keyword);
+        return dao.searchWord(map);
+    }
+
+
 
 }
