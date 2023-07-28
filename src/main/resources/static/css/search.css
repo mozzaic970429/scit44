@@ -1,0 +1,9 @@
+table td:first-child {
+    width: 50px;
+}
+table td:nth-child(2) {
+    width: 70px;
+}
+table td:nth-child(3) {
+    width: 100px;
+}
