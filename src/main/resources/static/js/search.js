@@ -7,7 +7,7 @@ function init() {
             let str = `
             <table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>;
             `;
-            $(b).each(function (index, item) {
+            $(b).each(function (_index, item) {
                 str += `<tr>`;
                 str += `<td>${item.boardnum}</td>`;
                 str += `<td>${item.category}</td>`;
@@ -31,7 +31,7 @@ function searchWord() {
         data: { keyword: keyword, category: category },
         success: function (list) {
             let str = "<table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>";
-            $(list).each(function (i, ob) {
+            $(list).each(function (_i, ob) {
                 str += "<tr>";
                 str += "<td>" + ob.boardnum + "</td>";
                 str += "<td>" + ob.category + "</td>";
@@ -66,7 +66,7 @@ function searchCategory() {
         data: { category: category },
         success: function (list) {
             let str = "<table><tr><th>번호</th><th>카테고리</th><th>제목</th></tr>";
-            $(list).each(function (i, ob) {
+            $(list).each(function (_i, ob) {
                 str += "<tr>";
                 str += "<td>" + ob.boardnum + "</td>";
                 str += "<td>" + ob.category + "</td>";
